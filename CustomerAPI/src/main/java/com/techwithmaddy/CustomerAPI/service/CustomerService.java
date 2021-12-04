@@ -2,14 +2,12 @@ package com.techwithmaddy.CustomerAPI.service;
 
 import com.techwithmaddy.CustomerAPI.model.Customer;
 import com.techwithmaddy.CustomerAPI.repository.CustomerRepository;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 @Service
-@Slf4j
 public class CustomerService {
 
     @Autowired
@@ -28,7 +26,6 @@ public class CustomerService {
         Customer customer = customerRepository.findCustomerByEmail(email);
 
         return Optional.ofNullable(customer);
-
     }
 
 
