@@ -5,7 +5,7 @@ import com.techwithmaddy.CustomerAPI.controllertest.AbstractTest;
 import com.techwithmaddy.CustomerAPI.exception.CustomerNotFoundException;
 import com.techwithmaddy.CustomerAPI.model.Customer;
 import com.techwithmaddy.CustomerAPI.service.CustomerService;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;

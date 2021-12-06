@@ -1,48 +1,35 @@
 package com.techwithmaddy.CustomerAPI.service;
 
-import com.techwithmaddy.CustomerAPI.controllertest.AbstractTest;
 import com.techwithmaddy.CustomerAPI.model.Customer;
-import com.techwithmaddy.CustomerAPI.repository.CustomerRepository;
 import org.junit.Test;
-import org.junit.jupiter.api.Assertions;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.junit.Assert.assertEquals;
 
-@RunWith(MockitoJUnitRunner.class)
-public class CustomerServiceTest extends AbstractTest {
+@RunWith(SpringRunner.class)
+@SpringBootTest
+public class CustomerServiceTest {
 
-    @Mock
-    private CustomerRepository customerRepository;
-
-    @InjectMocks
+    @Autowired
     private CustomerService customerService;
 
     @Test
     public void shouldSaveCustomerSuccessfully() {
         Customer customer = new Customer();
-        customer.setFirstName("Linda");
-        customer.setLastName("Jackson");
-        customer.setEmail("linda@jackson.com");
-        customer.setPhoneNumber("0123456789");
-
-        when(customerRepository.save(any(Customer.class))).thenReturn(customer);
+        customer.setFirstName("Richard");
+        customer.setLastName("Branson");
+        customer.setEmail("richard@branson.com");
+        customer.setPhoneNumber("0112233445566");
 
         Customer savedCustomer = customerService.saveCustomer(customer);
 
         assertThat(savedCustomer).isNotNull();
-
-        verify(customerRepository, times(1)).save(any(Customer.class));
 
     }
 
@@ -52,13 +39,14 @@ public class CustomerServiceTest extends AbstractTest {
         customer.setFirstName("Steve");
         customer.setLastName("Austin");
         customer.setEmail("steve@austin.com");
-        customer.setPhoneNumber("0123456789");
-
-        Mockito.when(customerRepository.findCustomerByEmail(customer.getEmail())).thenReturn(customer);
+        customer.setPhoneNumber("01223344556");
 
         Optional<Customer> retrievedCustomer = customerService.getCustomerByEmail(customer.getEmail());
 
-        Assertions.assertTrue(retrievedCustomer.isPresent());
+        assertEquals(retrievedCustomer.get().getFirstName(), customer.getFirstName());
+        assertEquals(retrievedCustomer.get().getLastName(), customer.getLastName());
+        assertEquals(retrievedCustomer.get().getEmail(), customer.getEmail());
+        assertEquals(retrievedCustomer.get().getPhoneNumber(), customer.getPhoneNumber());
 
     }
 }
