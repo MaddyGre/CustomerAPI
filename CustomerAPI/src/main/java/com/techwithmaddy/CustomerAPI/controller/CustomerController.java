@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
@@ -23,7 +25,7 @@ public class CustomerController {
 
     @RequestMapping(method = {POST}, path = "/save", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public Customer saveCustomer(@RequestBody Customer customer){
+    public Customer saveCustomer(@Valid @RequestBody Customer customer){
         return customerService.saveCustomer(customer);
     }
 
@@ -32,8 +34,5 @@ public class CustomerController {
     public Customer getCustomerByEmail(@RequestParam String email){
         return customerService.getCustomerByEmail(email).orElseThrow(CustomerNotFoundException::new);
     }
-
-
-
 
 }
