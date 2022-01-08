@@ -1,6 +1,6 @@
 # CustomerAPI
 
-This is a project that I used in my blog to explain how to create a Spring Boot REST API. 
+This is a project that I used in my [blog](https://techwithmaddy.com/how-to-create-a-spring-boot-rest-api) to explain how to create a Spring Boot REST API. 
 
 ### Requirements:
 
